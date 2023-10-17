@@ -10,19 +10,17 @@ public class PinBallMachine {
 
     public void insertCoin() {
         coins++;
-        if (currentState.getClass().getName().equals("NoCreditState")) {
+        if (currentState instanceof NoCreditState) {
             currentState = new ReadyState();
         }
         currentState.insertCoin(coins);
     }
 
     public void start() {
-        if (currentState.getClass().getName().equals("ReadyState")) {
-            currentState = new PlayState();
-        } else {
-            currentState.pressStartButton();
+        currentState.pressStartButton();
+        if (currentState instanceof ReadyState) {
+            coins--;
         }
-
     }
 
     public void end() {

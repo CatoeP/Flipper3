@@ -2,7 +2,8 @@ public class PlayState implements State{
 
     private int balls;
 
-    public PlayState(){
+    public PlayState(int balls){
+        this.balls = balls;
         this.info();
     }
 
@@ -17,9 +18,12 @@ public class PlayState implements State{
     }
 
     @Override
-    public void info() {
+    public void info(){
         System.out.println("Okay, Let's play!");
+        System.out.println("BALL " + balls);
         System.out.println("You pull the plunger and - realeased the ball!");
         System.out.println("The ball rolls fast into the arena!");
+
     }
+
 }
