@@ -1,3 +1,5 @@
+import Commands.Command;
+import Commands.HitCommand;
 import FlipperElements.FlipperElement;
 import States.NoCreditState;
 import States.ReadyState;
