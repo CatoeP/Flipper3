@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         PinBallMachine pinBallMachine = new PinBallMachine();
 
         Scanner sc = new Scanner(System.in);
@@ -20,5 +21,6 @@ public class Main {
                 case "s" -> pinBallMachine.start();
             }
         }
+
     }
 }
