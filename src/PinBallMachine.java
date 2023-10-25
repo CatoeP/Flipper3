@@ -1,9 +1,9 @@
-import Commands.Command;
-import Commands.HitCommand;
-import FlipperElements.FlipperElement;
-import States.NoCreditState;
-import States.ReadyState;
-import States.State;
+import commands.Command;
+import commands.HitCommand;
+import flipperElements.FlipperElement;
+import states.NoCreditState;
+import states.ReadyState;
+import states.State;
 
 public class PinBallMachine {
 
