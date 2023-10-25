@@ -1,4 +1,6 @@
-public class PlayState implements State{
+package States;
+
+public class PlayState implements State {
 
     private int balls;
 

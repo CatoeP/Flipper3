@@ -1,3 +1,8 @@
+import FlipperElements.FlipperElement;
+import States.NoCreditState;
+import States.ReadyState;
+import States.State;
+
 public class PinBallMachine {
 
     int coins;
@@ -21,6 +26,11 @@ public class PinBallMachine {
         if (currentState instanceof ReadyState) {
             coins--;
         }
+    }
+
+    public void hitFlipperElement(FlipperElement element) {
+        Command command = new HitCommand(element);
+        command.execute();
     }
 
     public void end() {

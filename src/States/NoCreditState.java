@@ -1,4 +1,6 @@
-public class NoCreditState implements State{
+package States;
+
+public class NoCreditState implements State {
 
     @Override
     public void insertCoin(int coins) {
