@@ -4,10 +4,10 @@ import Visitor.Visitor;
 public class Ramp extends FlipperElement {
 
     private final int score = 50;
-    private boolean isClosed;
+    private boolean isOpen;
 
     public Ramp() {
-        this.isClosed = false;
+        this.isOpen = true;
     }
 
     @Override
@@ -16,9 +16,10 @@ public class Ramp extends FlipperElement {
     }
 
     @Override
-    public int hit() {
-        System.out.println("A Ramp was hit. You received " + score + " points!");
+    public int hit(int multiplier) {
+        System.out.println(score*multiplier + " Points");
         return score*multiplier;
+
     }
 
     public void reset() {
@@ -26,16 +27,16 @@ public class Ramp extends FlipperElement {
     }
 
     public void close() {
-        isClosed = true;
+        isOpen = false;
     }
 
     public void open() {
-        isClosed = false;
+        isOpen = true;
     }
 
     @Override
     public boolean getState(){
-        return isClosed;
+        return isOpen;
     }
 
     @Override

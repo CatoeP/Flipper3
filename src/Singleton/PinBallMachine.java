@@ -11,6 +11,7 @@ public class PinBallMachine {
     private static PinBallMachine instance = null;
     private int coins = 0;
     private int finalScore =0;
+    private int multiplier=1;
     public NoCreditState noCredit = new NoCreditState(this);
     public ReadyState ready = new ReadyState(this);
     public PlayState play = new PlayState(this);
@@ -35,8 +36,18 @@ public class PinBallMachine {
         return coins;
     }
 
+    public void updateMultiplier(){
+        this.multiplier++;
+    }
+
+    public int getMultiplier(){
+        return multiplier;
+    }
+
     public void addPoints(int points){
         finalScore += points;
+        updateMultiplier();
+        System.out.println("COMBO X" + getMultiplier());
     }
 
     public int getFinalScore(){

@@ -8,13 +8,14 @@ public class Target extends FlipperElement{
     boolean isVisible;
 
     public Target() {
-        this.isVisible = false;
+        this.isVisible = true;
     }
 
     @Override
-    public int hit() {
-        System.out.println("A Target was hit. You received " + score + " points!");
+    public int hit(int multiplier) {
+        System.out.println(score*multiplier + " Points");
         return score*multiplier;
+
     }
 
     @Override
@@ -33,11 +34,11 @@ public class Target extends FlipperElement{
     }
 
     public void close() {
-        isVisible = true;
+        isVisible = false;
     }
 
     public void open() {
-        isVisible = false;
+        isVisible = true;
     }
 
     @Override

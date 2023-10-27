@@ -7,9 +7,10 @@ public class Bumper extends FlipperElement{
     private final int score = 10;
 
     @Override
-    public int hit() {
-        System.out.println("A Bumper was hit. You received " + score + " points!");
+    public int hit(int multiplier) {
+        System.out.println(score*multiplier + " Points");
         return score*multiplier;
+
     }
 
     @Override

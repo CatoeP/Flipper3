@@ -17,7 +17,6 @@ import java.util.Scanner;
 
 public class PlayState extends State {
 
-    int finalScore = 0;
     int balls;
     Scanner sc = new Scanner(System.in);
     String input;
@@ -27,7 +26,7 @@ public class PlayState extends State {
 
     public PlayState(PinBallMachine machine) {
         super(machine);
-        balls=1;
+        balls = 1;
         generateElements();
     }
 
@@ -38,11 +37,11 @@ public class PlayState extends State {
 
     @Override
     public void info() {
-            System.out.println("Okay, Let's play! \n Use the left/right arrow keys");
-            System.out.println("BALL " + balls);
-            System.out.println("You pull the plunger and - realeased the ball!");
-            System.out.println("The ball rolls fast into the arena!");
-            play();
+        System.out.println("Okay, Let's play! \n Use the left/right arrow keys");
+        System.out.println("BALL " + balls);
+        System.out.println("You pull the plunger and - realeased the ball!");
+        System.out.println("The ball rolls fast into the arena!");
+        play();
     }
 
     public int getBalls() {
@@ -74,7 +73,9 @@ public class PlayState extends State {
             if (input.equals("l") || input.equals("r")) {
                 ballInPlay = randomHitGenerator();
             } else if (input.equals("s")) {
-                pressStartButton();
+                machine.getState().pressStartButton();
+            } else if (input.equals("c")) {
+                machine.insertCoin();
             } else {
                 System.out.println("Bad input. Please only use 'l' or 'r' while in game.");
             }
@@ -88,26 +89,24 @@ public class PlayState extends State {
         int randomNumber = random.nextInt(100) + 1;
 
         //boolean remove: wenn true, handelt es sich um ein element, das nach hit vom spielfeld verschwindet
-        if (randomNumber <= 10 && checkAndRemoveElement(Target.class, true)) {
-            return true;
-        } else if (randomNumber <= 30 && checkAndRemoveElement(Ramp.class, true)) {
-            return true;
-        } else if (randomNumber <= 70 && checkAndRemoveElement(Ramp.class, false)) {
-            return true;
+        if (randomNumber <= 10) {
+            return checkAndRemoveElement(Target.class);
+        } else if (randomNumber <= 30) {
+            return checkAndRemoveElement(Ramp.class);
+        } else if (randomNumber <= 70) {
+            return checkAndRemoveElement(Bumper.class);
         } else {
             return false;
         }
     }
 
-    //Prüft, ob ein bestimmtes Element noch vorhanden ist, entfernt es vom spielfeld & fügt punkte hinzu ggf.
-    public boolean checkAndRemoveElement(Class<?> elementType, boolean remove) {
+    //Prüft, ob ein bestimmtes Element noch vorhanden (isOpen/isVisible) ist, entfernt es vom spielfeld & fügt punkte hinzu.
+    public boolean checkAndRemoveElement(Class<?> elementType) {
         for (FlipperElement element : flipperElements) {
-            if (elementType.isInstance(element) && !element.getState()) {
-                ScoreMakro.addCommand(new HitCommand(element,machine));
-                if (remove && element.getState()) {
-                    CloseCommand close = new CloseCommand(element,machine);
-                    close.execute();
-                }
+            if (elementType.isInstance(element) && element.getState()) {
+                ScoreMakro.addCommand(new HitCommand(element, machine));
+                CloseCommand close = new CloseCommand(element, machine);
+                close.execute();
                 return true;
             }
         }
@@ -119,15 +118,15 @@ public class PlayState extends State {
 
         ScoreMakro.execute();
 
-        if(balls<=0){
+        if (balls <= 0) {
             machine.reduceCoins();
             System.out.println("Ball lost. Game over.\nYour final Score is: " + machine.getFinalScore() + "\nCredits: " + machine.getCoins());
-            if(machine.getCoins()>0){
+            if (machine.getCoins() > 0) {
                 machine.setState(machine.ready);
-            }else{
+            } else {
                 machine.setState(machine.noCredit);
             }
-        }else {
+        } else {
             System.out.println("Ball lost. " + balls + " balls left.");
 
             //Elemente zurücksetzen mit Makrocommand
@@ -135,7 +134,7 @@ public class PlayState extends State {
             MakroCommand makro = new MakroCommand();
 
             for (FlipperElement element : flipperElements) {
-                makro.addCommand(new ResetCommand(element,machine));
+                makro.addCommand(new ResetCommand(element, machine));
             }
             makro.execute();
             System.out.println("Press 'p' to continue with the next ball!");

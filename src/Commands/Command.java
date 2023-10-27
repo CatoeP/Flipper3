@@ -7,8 +7,10 @@ public abstract class Command {
     protected FlipperElement flipperElement;
     protected PinBallMachine pinBallMachine;
 
-    //wegen makrocommand notwendig
-    public Command(){}
+    //wegen makrocommand
+    public Command(){
+
+    }
 
     public Command(FlipperElement element, PinBallMachine machine){
         flipperElement =element;
