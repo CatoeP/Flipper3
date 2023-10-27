@@ -1,8 +1,4 @@
 import Singleton.PinBallMachine;
-import States.NoCreditState;
-import States.PlayState;
-import States.ReadyState;
-
 import java.util.Scanner;
 
 public class Main {

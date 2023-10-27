@@ -26,7 +26,7 @@ public class PlayState extends State {
 
     public PlayState(PinBallMachine machine) {
         super(machine);
-        balls = 1;
+        resetBalls();
         generateElements();
     }
 
@@ -44,10 +44,6 @@ public class PlayState extends State {
         play();
     }
 
-    public int getBalls() {
-        return balls;
-    }
-
     public void generateElements() {
         flipperElements.add(new Ramp());
         flipperElements.add(new Ramp());
@@ -57,6 +53,10 @@ public class PlayState extends State {
         flipperElements.add(new Bumper());
         flipperElements.add(new Bumper());
         flipperElements.add(new Bumper());
+    }
+
+    public void resetBalls(){
+        this.balls = 2;
     }
 
     public void play() {
@@ -118,7 +118,7 @@ public class PlayState extends State {
 
         ScoreMakro.execute();
 
-        if (balls <= 0) {
+        if (balls == 0) {
             machine.reduceCoins();
             System.out.println("Ball lost. Game over.\nYour final Score is: " + machine.getFinalScore() + "\nCredits: " + machine.getCoins());
             if (machine.getCoins() > 0) {
@@ -126,8 +126,10 @@ public class PlayState extends State {
             } else {
                 machine.setState(machine.noCredit);
             }
+            resetBalls();
         } else {
             System.out.println("Ball lost. " + balls + " balls left.");
+            machine.setState(machine.ready);
 
             //Elemente zurücksetzen mit Makrocommand
             System.out.println("Resetting all elements...");
@@ -137,8 +139,6 @@ public class PlayState extends State {
                 makro.addCommand(new ResetCommand(element, machine));
             }
             makro.execute();
-            System.out.println("Press 'p' to continue with the next ball!");
-
         }
     }
 
