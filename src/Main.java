@@ -48,6 +48,9 @@ public class Main {
                     if(pinBallMachine.getState().equals(pinBallMachine.ready)){
                         pinBallMachine.setState(pinBallMachine.play);
                     }
+                    else {
+                        pinBallMachine.getState().pressStartButton();
+                    }
                 }
             }
         }

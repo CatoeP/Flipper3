@@ -14,7 +14,7 @@ public class PointVisitor extends Visitor{
 
     @Override
     public void visit(Ramp ramp) {
-        pinBallMachine.addPoints(ramp.hit(pinBallMachine.getMultiplier()));
+        PinBallMachine.getInstance().addPoints(ramp.hit(pinBallMachine.getMultiplier()));
     }
 
     @Override

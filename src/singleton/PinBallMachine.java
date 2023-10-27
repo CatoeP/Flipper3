@@ -45,6 +45,10 @@ public class PinBallMachine {
         return multiplier;
     }
 
+    public void setMultiplier(int multiplier) {
+        this.multiplier = multiplier;
+    }
+
     public void addPoints(int points){
         finalScore += points;
         updateMultiplier();

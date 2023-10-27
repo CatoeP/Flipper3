@@ -136,6 +136,7 @@ public class PlayState extends State {
 
     public void ballLost() {
         balls--;
+        PinBallMachine.getInstance().setMultiplier(1);
 
         ScoreMakro.execute();
 
@@ -158,8 +159,10 @@ public class PlayState extends State {
                 machine.setState(machine.noCredit);
             }
             resetBalls();
+
         } else {
             System.out.println("Ball lost. " + balls + " balls left.");
+            System.out.println("Your Score is: " + machine.getFinalScore());
             machine.setState(machine.ready);
 
             //Elemente zurücksetzen mit Makrocommand
