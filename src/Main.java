@@ -1,5 +1,4 @@
-package Singleton;
-
+import Singleton.PinBallMachine;
 import States.NoCreditState;
 import States.PlayState;
 import States.ReadyState;
