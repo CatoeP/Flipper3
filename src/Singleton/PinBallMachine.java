@@ -39,6 +39,10 @@ public class PinBallMachine {
         finalScore += points;
     }
 
+    public int getFinalScore(){
+        return finalScore;
+    }
+
     public void reduceCoins(){
         this.coins--;
     }

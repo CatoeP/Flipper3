@@ -121,7 +121,7 @@ public class PlayState extends State {
 
         if(balls<=0){
             machine.reduceCoins();
-            System.out.println("Ball lost. Game over.\nCredits: " + machine.getCoins());
+            System.out.println("Ball lost. Game over.\nYour final Score is: " + machine.getFinalScore() + "\nCredits: " + machine.getCoins());
             if(machine.getCoins()>0){
                 machine.setState(machine.ready);
             }else{
