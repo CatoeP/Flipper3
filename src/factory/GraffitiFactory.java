@@ -2,10 +2,13 @@ package factory;
 
 public class GraffitiFactory implements MainFactory {
 
-    private Ball ballOne = new BallOne();
-    private Ball ballTwo = new BallTwo();
-    private Ball ballThree = new BallThree();
-    private GameOver gameOver = new GameOver1();
+
+
+    private Ball ballOne = new BallOne2();
+    private Ball ballTwo = new BallTwo2();
+    private Ball ballThree = new BallThree2();
+    private GameOver gameOver = new GameOver2();
+
 
     public GraffitiFactory() {
     }

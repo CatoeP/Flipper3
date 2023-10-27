@@ -19,16 +19,6 @@ public class Main {
             switch (input) {
                 case "c" -> {
                     pinBallMachine.insertCoin();
-                    if(pinBallMachine.getState().equals(pinBallMachine.noCredit)){
-                        pinBallMachine.setState(pinBallMachine.ready);
-                    }
-                }
-                case "e" -> {
-                    pinBallMachine.end();
-                    running = false;
-                    sc.close();
-                }
-                case "s" -> {
                     System.out.println("Choose your design: Graffiti (g) or Star Wars (sw)");
                     String designChoice = sc.next();
                     MainFactory factory;
@@ -45,7 +35,16 @@ public class Main {
                     }
 
                     pinBallMachine.setFactory(factory);
-
+                    if(pinBallMachine.getState().equals(pinBallMachine.noCredit)){
+                        pinBallMachine.setState(pinBallMachine.ready);
+                    }
+                }
+                case "e" -> {
+                    pinBallMachine.end();
+                    running = false;
+                    sc.close();
+                }
+                case "s" -> {
                     if(pinBallMachine.getState().equals(pinBallMachine.ready)){
                         pinBallMachine.setState(pinBallMachine.play);
                     }
