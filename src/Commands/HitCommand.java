@@ -1,17 +1,18 @@
 package Commands;
 
 import FlipperElements.FlipperElement;
+import Visitor.PointVisitor;
 
-public class HitCommand implements Command {
-    private FlipperElement element;
+public class HitCommand extends Command {
+    PointVisitor pointVisitor = new PointVisitor();
 
-    public HitCommand(FlipperElement element) {
-        this.element = element;
+    public HitCommand(FlipperElement element){
+        super(element);
     }
 
     @Override
     public void execute() {
-        element.hit();
+        flipperElement.accept(pointVisitor);
     }
 
 }

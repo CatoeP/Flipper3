@@ -1,21 +1,16 @@
-package States;//Hier werden die Bälle initialisiert
+package States;
 
-public class ReadyState implements State {
-    int balls =3;
+import Singleton.PinBallMachine;
 
-    public ReadyState(){
-        this.info();
-    }
+public class ReadyState extends State {
 
-    @Override
-    public void insertCoin(int coins) {
-        System.out.println("Coin inserted. New Credits: " + coins);
-    }
+    public ReadyState(PinBallMachine machine){
+        super(machine);
+  }
 
     @Override
     public void pressStartButton() {
         System.out.println("Starting the game...");
-        PlayState newGame = new PlayState(balls);
     }
 
     @Override

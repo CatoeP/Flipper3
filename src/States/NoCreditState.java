@@ -1,10 +1,11 @@
 package States;
 
-public class NoCreditState implements State {
+import Singleton.PinBallMachine;
 
-    @Override
-    public void insertCoin(int coins) {
-        System.out.println("Coin inserted. New Credits: " + coins);
+public class NoCreditState extends State {
+
+    public NoCreditState(PinBallMachine machine){
+        super(machine);
     }
 
     @Override
@@ -13,6 +14,6 @@ public class NoCreditState implements State {
     }
 
     public void info(){
-        System.out.println("No credits. Please insert coins by typing 'c'. \n You can insert coins anytime.");
+        System.out.println("No credits. Please insert coins by typing 'c'.\nYou can insert coins anytime.");
     }
 }
