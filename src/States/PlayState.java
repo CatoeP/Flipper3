@@ -42,15 +42,27 @@ public class PlayState extends State {
     @Override
     public void info() {
 
-        MainFactory factory = machine.getFactory();
-        String ballImage = factory.createBall1();
-
+        String ballImage = getBallImage(balls);
 
         System.out.println(ballImage);
         System.out.println("Okay, Let's play! \n Use the left (l) / right (r) arrow keys");
         System.out.println("You pull the plunger and - realeased the ball!");
         System.out.println("The ball rolls fast into the arena!");
         play();
+    }
+
+    private String getBallImage(int ballNumber) {
+        MainFactory factory = machine.getFactory();
+        switch(ballNumber) {
+            case 3:
+                return factory.createBall1();
+            case 2:
+                return factory.createBall2();
+            case 1:
+                return factory.createBall3();
+            default:
+                throw new IllegalArgumentException("Invalid ball number");
+        }
     }
 
     public void generateElements() {
@@ -65,7 +77,7 @@ public class PlayState extends State {
     }
 
     public void resetBalls(){
-        this.balls = 2;
+        this.balls = 3;
     }
 
     public void play() {
@@ -129,6 +141,13 @@ public class PlayState extends State {
 
         if (balls == 0) {
             machine.reduceCoins();
+            MainFactory currentFactory = machine.getFactory();
+            if (currentFactory != null) {
+                String gameOverImage = currentFactory.createGameOver();
+                System.out.println(gameOverImage);
+                System.out.println("Ball lost. Game over.\nYour final Score is: " + machine.getFinalScore() + "\nCredits: " + machine.getCoins());
+
+            }
             System.out.println("Ball lost. Game over.\nYour final Score is: " + machine.getFinalScore() + "\nCredits: " + machine.getCoins());
             if (machine.getCoins() > 0) {
                 machine.setState(machine.ready);
