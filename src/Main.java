@@ -1,7 +1,4 @@
-import Singleton.PinBallMachine;
-import States.NoCreditState;
-import States.PlayState;
-import States.ReadyState;
+import singleton.PinBallMachine;
 import factory.GraffitiFactory;
 import factory.MainFactory;
 import factory.StarFactory;

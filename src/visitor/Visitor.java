@@ -1,8 +1,8 @@
-package Visitor;
+package visitor;
 
-import FlipperElements.Bumper;
-import FlipperElements.Ramp;
-import FlipperElements.Target;
+import flipperElements.Bumper;
+import flipperElements.Ramp;
+import flipperElements.Target;
 
 public abstract class Visitor {
     public abstract void visit(Ramp ramp);

@@ -1,5 +1,5 @@
-package FlipperElements;
-import Visitor.Visitor;
+package flipperElements;
+import visitor.Visitor;
 
 public class Ramp extends FlipperElement {
 

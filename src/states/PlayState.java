@@ -1,14 +1,14 @@
-package States;
+package states;
 
-import Commands.CloseCommand;
-import Commands.HitCommand;
-import Commands.MakroCommand;
-import Commands.ResetCommand;
-import FlipperElements.Bumper;
-import FlipperElements.FlipperElement;
-import FlipperElements.Ramp;
-import FlipperElements.Target;
-import Singleton.PinBallMachine;
+import commands.CloseCommand;
+import commands.HitCommand;
+import commands.MakroCommand;
+import commands.ResetCommand;
+import flipperElements.Bumper;
+import flipperElements.FlipperElement;
+import flipperElements.Ramp;
+import flipperElements.Target;
+import singleton.PinBallMachine;
 import factory.MainFactory;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class PlayState extends State {
         String ballImage = getBallImage(balls);
 
         System.out.println(ballImage);
-        System.out.println("Okay, Let's play! \n Use the left (l) / right (r) arrow keys");
+        System.out.println("Okay, Let's play! \n Use left (l) / right (r) to flip the ball");
         System.out.println("You pull the plunger and - realeased the ball!");
         System.out.println("The ball rolls fast into the arena!");
         play();
@@ -148,7 +148,9 @@ public class PlayState extends State {
                 System.out.println("Ball lost. Game over.\nYour final Score is: " + machine.getFinalScore() + "\nCredits: " + machine.getCoins());
 
             }
-            System.out.println("Ball lost. Game over.\nYour final Score is: " + machine.getFinalScore() + "\nCredits: " + machine.getCoins());
+            else {
+                System.out.println("Ball lost. Game over.\nYour final Score is: " + machine.getFinalScore() + "\nCredits: " + machine.getCoins());
+            }
             if (machine.getCoins() > 0) {
                 machine.setState(machine.ready);
 

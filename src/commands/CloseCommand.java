@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import FlipperElements.FlipperElement;
-import Singleton.PinBallMachine;
-import Visitor.CloseVisitor;
+import flipperElements.FlipperElement;
+import singleton.PinBallMachine;
+import visitor.CloseVisitor;
 
 public class CloseCommand extends Command {
     CloseVisitor closeVisitor = new CloseVisitor();

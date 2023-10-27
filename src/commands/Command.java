@@ -1,7 +1,7 @@
-package Commands;
+package commands;
 
-import FlipperElements.FlipperElement;
-import Singleton.PinBallMachine;
+import flipperElements.FlipperElement;
+import singleton.PinBallMachine;
 
 public abstract class Command {
     protected FlipperElement flipperElement;

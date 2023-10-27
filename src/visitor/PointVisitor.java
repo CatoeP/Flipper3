@@ -1,9 +1,9 @@
-package Visitor;
+package visitor;
 
-import FlipperElements.Bumper;
-import FlipperElements.Ramp;
-import FlipperElements.Target;
-import Singleton.PinBallMachine;
+import flipperElements.Bumper;
+import flipperElements.Ramp;
+import flipperElements.Target;
+import singleton.PinBallMachine;
 
 public class PointVisitor extends Visitor{
     private PinBallMachine pinBallMachine;

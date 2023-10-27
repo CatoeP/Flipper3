@@ -1,6 +1,6 @@
-package States;
+package states;
 
-import Singleton.PinBallMachine;
+import singleton.PinBallMachine;
 
 public class ReadyState extends State {
 

@@ -1,6 +1,6 @@
-package FlipperElements;
+package flipperElements;
 
-import Visitor.Visitor;
+import visitor.Visitor;
 
 public abstract class FlipperElement {
 

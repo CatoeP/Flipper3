@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import FlipperElements.FlipperElement;
-import Singleton.PinBallMachine;
-import Visitor.PointVisitor;
+import flipperElements.FlipperElement;
+import singleton.PinBallMachine;
+import visitor.PointVisitor;
 
 public class HitCommand extends Command {
     PointVisitor pointVisitor = new PointVisitor(pinBallMachine);

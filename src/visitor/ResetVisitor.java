@@ -1,7 +1,7 @@
-package Visitor;
+package visitor;
 
-import FlipperElements.Ramp;
-import FlipperElements.Target;
+import flipperElements.Ramp;
+import flipperElements.Target;
 
 public class ResetVisitor extends Visitor{
     @Override

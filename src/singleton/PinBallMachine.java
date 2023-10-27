@@ -1,9 +1,9 @@
-package Singleton;
+package singleton;
 
-import States.NoCreditState;
-import States.PlayState;
-import States.ReadyState;
-import States.State;
+import states.NoCreditState;
+import states.PlayState;
+import states.ReadyState;
+import states.State;
 import factory.MainFactory;
 
 public class PinBallMachine {

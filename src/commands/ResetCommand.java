@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import FlipperElements.FlipperElement;
-import Singleton.PinBallMachine;
-import Visitor.ResetVisitor;
+import flipperElements.FlipperElement;
+import singleton.PinBallMachine;
+import visitor.ResetVisitor;
 
 public class ResetCommand extends Command{
     ResetVisitor resetVisitor = new ResetVisitor();
