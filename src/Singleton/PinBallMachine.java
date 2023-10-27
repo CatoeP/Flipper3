@@ -1,17 +1,24 @@
 package Singleton;
 
+import States.NoCreditState;
+import States.PlayState;
+import States.ReadyState;
 import States.State;
 
 public class PinBallMachine {
 
     private State currentState;
     private static PinBallMachine instance = null;
+    private int coins = 0;
+    private int finalScore =0;
+    public NoCreditState noCredit = new NoCreditState(this);
+    public ReadyState ready = new ReadyState(this);
+    public PlayState play = new PlayState(this);
 
     //Singleton: Sicherstellen, dass von PinballMachine nur eine Instanz existiert
     public static PinBallMachine getInstance() {
-        if (instance == null) {
+        if (instance == null)
             instance = new PinBallMachine();
-        }
         return instance;
     }
 
@@ -25,11 +32,20 @@ public class PinBallMachine {
     }
 
     public int getCoins(){
-        return currentState.getCoins();
+        return coins;
+    }
+
+    public void addPoints(int points){
+        finalScore += points;
+    }
+
+    public void reduceCoins(){
+        this.coins--;
     }
 
     public void insertCoin() {
-        currentState.insertCoin();
+        coins++;
+        System.out.println("Coin inserted. Credits: " + getCoins());
     }
 
     public void start() {
@@ -39,4 +55,5 @@ public class PinBallMachine {
     public void end() {
         System.out.println("Thank you for playing. See you soon!");
     }
+
 }

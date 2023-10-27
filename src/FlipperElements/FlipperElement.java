@@ -24,4 +24,6 @@ public abstract class FlipperElement {
         return true;
     }
 
+    public abstract String toString();
+
 }

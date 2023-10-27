@@ -39,4 +39,9 @@ public class Target extends FlipperElement{
     public void open() {
         isVisible = false;
     }
+
+    @Override
+    public String toString(){
+        return "Target";
+    }
 }

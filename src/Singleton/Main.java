@@ -9,11 +9,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        var pinBallMachine = PinBallMachine.getInstance();
-        NoCreditState noCredit = new NoCreditState(pinBallMachine);
-        ReadyState ready = new ReadyState(pinBallMachine);
-        PlayState play = new PlayState(pinBallMachine);
-        pinBallMachine.setState(noCredit);
+        PinBallMachine pinBallMachine = PinBallMachine.getInstance();
+        pinBallMachine.setState(pinBallMachine.noCredit);
 
         Scanner sc = new Scanner(System.in);
         boolean running = true;
@@ -24,8 +21,8 @@ public class Main {
             switch (input) {
                 case "c" -> {
                     pinBallMachine.insertCoin();
-                    if(pinBallMachine.getState().equals(noCredit)){
-                        pinBallMachine.setState(ready);
+                    if(pinBallMachine.getState().equals(pinBallMachine.noCredit)){
+                        pinBallMachine.setState(pinBallMachine.ready);
                     }
                 }
                 case "e" -> {
@@ -35,8 +32,8 @@ public class Main {
                 }
                 case "s" -> {
                     pinBallMachine.start();
-                    if(pinBallMachine.getState().equals(ready)){
-                        pinBallMachine.setState(play);
+                    if(pinBallMachine.getState().equals(pinBallMachine.ready)){
+                        pinBallMachine.setState(pinBallMachine.play);
                     }
                 }
             }

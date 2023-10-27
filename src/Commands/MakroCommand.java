@@ -1,6 +1,7 @@
 package Commands;
 
 import FlipperElements.FlipperElement;
+import Singleton.PinBallMachine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,4 +21,5 @@ public class MakroCommand extends Command{
             command.execute();
         }
     }
+
 }

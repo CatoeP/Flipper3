@@ -9,7 +9,6 @@ import FlipperElements.FlipperElement;
 import FlipperElements.Ramp;
 import FlipperElements.Target;
 import Singleton.PinBallMachine;
-import Visitor.ResetVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +18,17 @@ import java.util.Scanner;
 public class PlayState extends State {
 
     int finalScore = 0;
-    int balls = 3;
-    private Scanner sc = new Scanner(System.in);
+    int balls;
+    Scanner sc = new Scanner(System.in);
+    String input;
     Random random = new Random();
     List<FlipperElement> flipperElements = new ArrayList<>();
-    MakroCommand makro = new MakroCommand();
+    MakroCommand ScoreMakro = new MakroCommand();
 
     public PlayState(PinBallMachine machine) {
         super(machine);
+        balls=1;
+        generateElements();
     }
 
     @Override
@@ -36,15 +38,11 @@ public class PlayState extends State {
 
     @Override
     public void info() {
-        if (balls == 0) {
-            System.out.println("Game over.");
-        } else {
             System.out.println("Okay, Let's play! \n Use the left/right arrow keys");
             System.out.println("BALL " + balls);
             System.out.println("You pull the plunger and - realeased the ball!");
             System.out.println("The ball rolls fast into the arena!");
             play();
-        }
     }
 
     public int getBalls() {
@@ -64,12 +62,8 @@ public class PlayState extends State {
 
     public void play() {
 
-        generateElements();
-
         //Möglichkeit, Elemente zu treffen direkt nach Balleinwurf
         boolean ballInPlay = randomHitGenerator();
-
-        String input;
 
         //Falls beim Balleinwurf direkt Loch getroffen wird
         if (!ballInPlay) {
@@ -82,12 +76,10 @@ public class PlayState extends State {
             } else if (input.equals("s")) {
                 pressStartButton();
             } else {
-                System.out.println("Bad input. PLease only use 'l' or 'r' while in game.");
+                System.out.println("Bad input. Please only use 'l' or 'r' while in game.");
             }
         }
-        sc.close();
-        info();
-
+        ballLost();
     }
 
     public boolean randomHitGenerator() {
@@ -97,17 +89,12 @@ public class PlayState extends State {
 
         //boolean remove: wenn true, handelt es sich um ein element, das nach hit vom spielfeld verschwindet
         if (randomNumber <= 10 && checkAndRemoveElement(Target.class, true)) {
-            System.out.println("Hit a target!");
             return true;
         } else if (randomNumber <= 30 && checkAndRemoveElement(Ramp.class, true)) {
-            System.out.println("Hit a Ramp");
             return true;
         } else if (randomNumber <= 70 && checkAndRemoveElement(Ramp.class, false)) {
-            System.out.println("Hit a bumper");
             return true;
         } else {
-            System.out.println("Hit a hole");
-            ballLost();
             return false;
         }
     }
@@ -115,10 +102,10 @@ public class PlayState extends State {
     //Prüft, ob ein bestimmtes Element noch vorhanden ist, entfernt es vom spielfeld & fügt punkte hinzu ggf.
     public boolean checkAndRemoveElement(Class<?> elementType, boolean remove) {
         for (FlipperElement element : flipperElements) {
-            if (elementType.isInstance(element)) {
-                makro.addCommand(new HitCommand(element));
+            if (elementType.isInstance(element) && !element.getState()) {
+                ScoreMakro.addCommand(new HitCommand(element,machine));
                 if (remove && element.getState()) {
-                    CloseCommand close = new CloseCommand(element);
+                    CloseCommand close = new CloseCommand(element,machine);
                     close.execute();
                 }
                 return true;
@@ -129,16 +116,31 @@ public class PlayState extends State {
 
     public void ballLost() {
         balls--;
-        System.out.println("Ball lost. " + balls + " balls left.");
 
-        //Elemente zurücksetzen mit Makrocommand
-        System.out.println("Resetting all elements...");
-        MakroCommand makro = new MakroCommand();
+        ScoreMakro.execute();
 
-        for (FlipperElement element : flipperElements) {
-            makro.addCommand(new ResetCommand(element));
+        if(balls<=0){
+            machine.reduceCoins();
+            System.out.println("Ball lost. Game over.\nCredits: " + machine.getCoins());
+            if(machine.getCoins()>0){
+                machine.setState(machine.ready);
+            }else{
+                machine.setState(machine.noCredit);
+            }
+        }else {
+            System.out.println("Ball lost. " + balls + " balls left.");
+
+            //Elemente zurücksetzen mit Makrocommand
+            System.out.println("Resetting all elements...");
+            MakroCommand makro = new MakroCommand();
+
+            for (FlipperElement element : flipperElements) {
+                makro.addCommand(new ResetCommand(element,machine));
+            }
+            makro.execute();
+            System.out.println("Press 'p' to continue with the next ball!");
+
         }
-        makro.execute();
     }
 
 }

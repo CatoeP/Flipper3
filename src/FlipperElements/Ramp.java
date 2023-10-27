@@ -37,5 +37,10 @@ public class Ramp extends FlipperElement {
     public boolean getState(){
         return isClosed;
     }
+
+    @Override
+    public String toString(){
+        return "Ramp";
+    }
 }
 
