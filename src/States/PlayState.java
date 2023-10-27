@@ -9,6 +9,7 @@ import FlipperElements.FlipperElement;
 import FlipperElements.Ramp;
 import FlipperElements.Target;
 import Singleton.PinBallMachine;
+import factory.MainFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +25,17 @@ public class PlayState extends State {
     List<FlipperElement> flipperElements = new ArrayList<>();
     MakroCommand ScoreMakro = new MakroCommand();
 
+
+
     public PlayState(PinBallMachine machine) {
         super(machine);
         resetBalls();
         generateElements();
     }
 
+    private void resetBalls() {
+        this.balls = 1;
+    }
     @Override
     public void pressStartButton() {
         System.out.println("This Pinball Automation was developed by \n Karin König \n Spyridoula Arvaniti \n Katharina Prokopovic");
@@ -37,8 +43,13 @@ public class PlayState extends State {
 
     @Override
     public void info() {
-        System.out.println("Okay, Let's play! \n Use the left/right arrow keys");
-        System.out.println("BALL " + balls);
+
+        MainFactory factory = machine.getFactory();
+        String ballImage = factory.createBall1();
+
+
+        System.out.println(ballImage);
+        System.out.println("Okay, Let's play! \n Use the left (l) / right (r) arrow keys");
         System.out.println("You pull the plunger and - realeased the ball!");
         System.out.println("The ball rolls fast into the arena!");
         play();
@@ -123,6 +134,7 @@ public class PlayState extends State {
             System.out.println("Ball lost. Game over.\nYour final Score is: " + machine.getFinalScore() + "\nCredits: " + machine.getCoins());
             if (machine.getCoins() > 0) {
                 machine.setState(machine.ready);
+
             } else {
                 machine.setState(machine.noCredit);
             }

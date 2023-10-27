@@ -4,6 +4,7 @@ import States.NoCreditState;
 import States.PlayState;
 import States.ReadyState;
 import States.State;
+import factory.MainFactory;
 
 public class PinBallMachine {
 
@@ -69,6 +70,16 @@ public class PinBallMachine {
 
     public void end() {
         System.out.println("Thank you for playing. See you soon!");
+    }
+
+    private MainFactory factory;
+
+    public void setFactory(MainFactory factory) {
+        this.factory = factory;
+    }
+
+    public MainFactory getFactory() {
+        return this.factory;
     }
 
 }
