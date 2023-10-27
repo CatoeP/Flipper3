@@ -33,9 +33,7 @@ public class PlayState extends State {
         generateElements();
     }
 
-    private void resetBalls() {
-        this.balls = 1;
-    }
+
     @Override
     public void pressStartButton() {
         System.out.println("This Pinball Automation was developed by \n Karin König \n Spyridoula Arvaniti \n Katharina Prokopovic");
