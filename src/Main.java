@@ -2,6 +2,9 @@ import Singleton.PinBallMachine;
 import States.NoCreditState;
 import States.PlayState;
 import States.ReadyState;
+import factory.GraffitiFactory;
+import factory.MainFactory;
+import factory.StarFactory;
 
 import java.util.Scanner;
 
@@ -13,7 +16,6 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         boolean running = true;
-
 
         while (running) {
             String input = sc.next();
@@ -30,14 +32,28 @@ public class Main {
                     sc.close();
                 }
                 case "s" -> {
-                    pinBallMachine.start();
+                    System.out.println("Choose your design: Graffiti (g) or Star Wars (sw)");
+                    String designChoice = sc.next();
+                    MainFactory factory;
+
+                    if (designChoice.equals("g")) {
+                        factory = new GraffitiFactory();
+                        System.out.println("Your Choice: Graffiti");
+                    } else if (designChoice.equals("sw")) {
+                        factory = new StarFactory();
+                        System.out.println("Your Choice: Star Wars");
+                    } else {
+                        System.out.println("Invalid choice! Default setting = Star Wars");
+                        factory = new StarFactory();
+                    }
+
+                    pinBallMachine.setFactory(factory);
+
                     if(pinBallMachine.getState().equals(pinBallMachine.ready)){
                         pinBallMachine.setState(pinBallMachine.play);
                     }
                 }
             }
         }
-
-
     }
 }
