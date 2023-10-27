@@ -4,13 +4,8 @@ import Visitor.Visitor;
 
 public class Bumper extends FlipperElement{
 
-    private final int score = 10;
-
-    @Override
-    public int hit(int multiplier) {
-        System.out.println(score*multiplier + " Points");
-        return score*multiplier;
-
+    public Bumper(){
+        super(10);
     }
 
     @Override

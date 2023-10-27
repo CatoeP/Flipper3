@@ -4,18 +4,11 @@ import Visitor.Visitor;
 
 public class Target extends FlipperElement{
 
-    private final int score = 30;
     boolean isVisible;
 
     public Target() {
+        super(30);
         this.isVisible = true;
-    }
-
-    @Override
-    public int hit(int multiplier) {
-        System.out.println(score*multiplier + " Points");
-        return score*multiplier;
-
     }
 
     @Override
